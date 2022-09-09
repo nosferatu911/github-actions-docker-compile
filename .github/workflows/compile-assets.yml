@@ -11,10 +11,8 @@ jobs:
       - name: Run Docker container to compile assets
         uses: docker://aschmelyun/cleaver:latest
         with:
-          args: -v ${{ github.workspace }}:/var/www
-          run: |
-            composer install
-            npm install
-            npm run production
+          args: >-
+            -v ${{ github.workspace }}:/var/www 
+            /bin/sh -c "composer install && npm install && npm run production"
       - name: Verify assets
         run: ls -l dist
