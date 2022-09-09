@@ -12,9 +12,9 @@ jobs:
         uses: docker://aschmelyun/cleaver:latest
         with:
           args: -v ${{ github.workspace }}:/var/www
-        run: |
-          composer install
-          npm install
-          npm run production
+          run: |
+            composer install
+            npm install
+            npm run production
       - name: Verify assets
         run: ls -l dist
