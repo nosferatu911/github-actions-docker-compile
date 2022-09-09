@@ -8,3 +8,13 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+      - name: Run Docker container to compile assets
+        uses: docker://aschmelyun/cleaver:latest
+        with:
+          args: -v ${{ github.workspace }}:/var/www
+        run: |
+          composer install
+          npm install
+          npm run production
+      - name: Verify assets
+        run: ls -l dist
